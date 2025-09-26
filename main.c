@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include "device.h"
 #include "print.h"
+#include "init.h"
+#include "update.h"
+#include "search.h"
 
 int is_cmd(const char *input, const char *cmd) {  // 명령어 비교 함수
     return strcmp(input, cmd) == 0;
