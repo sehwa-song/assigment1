@@ -16,7 +16,7 @@ void update (int fd, int id) {
 	while (read(fd, &s, sizeof(Sensor)) == sizeof(Sensor)) {   // 파일을 읽어서
    		if (s.id == id) {  // 조건이 맞으면
        			found = 1;
-       		 	printf(수정 전 데이터 출력 : ID=%d, Name=%s, Status=%s\n", s.id, s.name, s.status);
+       		 	printf("수정 전 데이터 출력 : ID=%d, Name=%s, Status=%s\n", s.id, s.name, s.status);
 
         		printf("수정 후 데이터 입력: ");
         		scanf("%s", s.status); // 상태만 재입력
