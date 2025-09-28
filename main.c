@@ -39,12 +39,12 @@ int main(int argc, char *argv[]) {
         print_all(fp);   // 전체 데이터 출력하기
         fclose(fp);
     } else if (is_cmd(argv[1], "update")) {  // 특정 id 센서 데이터 출력하기
-        if (argc != 4) {  // binary 파아ㅣㄹ과 id 필요함.
+        if (argc != 5) {  // binary 파아ㅣㄹ과 id 필요함.
             fprintf(stderr, "사용법: %s update [data_binary.dat] [id]\n", argv[0]);
             return 1;
         }
         int id = atoi(argv[3]);   // 문자열이라 정수형으로 변환해서 id 로 사용
-        int fd = open(argv[2], 0_RDWR); // 파일을 읽기 모드와 쓰기 모드로 열기
+        int fd = open(argv[2], O_RDWR); // 파일을 읽기 모드와 쓰기 모드로 열기
 	if (fd < 0) {
 		perror("파일 열기 실패");
 		return 1;
