@@ -42,7 +42,15 @@ int main(int argc, char *argv[]) {
             return 1;
         }
         int id = atoi(argv[3]);   // 문자열이라 정수형으로 변환해서 id 로 사용
-        update(argv[2], id);
+        int fd = open(argv[2], 0_RDWR); // 파일을 읽기 모드와 쓰기 모드로 열기
+	if (fd < 0) {
+		perror("파일 열기 실패");
+		return 1;
+	}
+
+	update (fd, id);   // 열린 fd와 id 넘겨줌
+
+	close(fd);
     } else if (is_cmd(argv[1], "search")) {  // search를 통해 키워드 검색하기
         if (argc != 4) {  // binary 파일과 키워드 필요함
             fprintf(stderr, "사용법: %s search [data_binary.dat] [keyword]\n", argv[0]);
