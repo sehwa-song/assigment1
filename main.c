@@ -38,21 +38,23 @@ int main(int argc, char *argv[]) {
         }
         print_all(fp);   // 전체 데이터 출력하기
         fclose(fp);
-    } else if (is_cmd(argv[1], "update")) {  // 특정 id 센서 데이터 출력하기
-        if (argc != 5) {  // binary 파아ㅣㄹ과 id 필요함.
-            fprintf(stderr, "사용법: %s update [data_binary.dat] [id]\n", argv[0]);
+    } else if (is_cmd(argv[1], "update")) {  // 특정 id 센서 데이터 수정하기
+        if (argc != 6) {  // binary 파일, id, name, status → 총 4개의 인자가 필요
+            fprintf(stderr, "사용법: %s update [data_binary.dat] [id] [name or -] [status or -]\n", argv[0]);
             return 1;
         }
-        int id = atoi(argv[3]);   // 문자열이라 정수형으로 변환해서 id 로 사용
-        int fd = open(argv[2], O_RDWR); // 파일을 읽기 모드와 쓰기 모드로 열기
-	if (fd < 0) {
-		perror("파일 열기 실패");
-		return 1;
-	}
+        int id = atoi(argv[3]);   // 문자열을 정수형으로 변환 → id로 사용
+        int fd = open(argv[2], O_RDWR); // 읽기, 쓰기 모드로 열기
+        if (fd < 0) {
+            perror("파일 열기 실패");
+            return 1;
+        }
 
-	update (fd, id);   // 열린 fd와 id 넘겨줌
+        // update 함수에 파일, id, name, status 전달
+        update(fd, id, argv[4], argv[5]);
 
-	close(fd);
+        close(fd);
+
     } else if (is_cmd(argv[1], "search")) {  // search를 통해 키워드 검색하기
         if (argc != 4) {  // binary 파일과 키워드 필요함
             fprintf(stderr, "사용법: %s search [data_binary.dat] [keyword]\n", argv[0]);
