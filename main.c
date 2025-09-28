@@ -12,7 +12,7 @@ int is_cmd(const char *input, const char *cmd) {  // 명령어 비교 함수
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 2) { // 필요한 정보가 2개 미만시 명령어 없음. (정보 부족)
+    if (argc < 3) { // 필요한 정보가 3개 미만시 명령어 없음. (정보 부족)
         fprintf(stderr, "%s 실행 방법: 명령어, 파일명\n", argv[0]);
         fprintf(stderr, "가능한 명령어-> init, print, update, search\n");
         return 1;
